@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const errorHandler = require('./middlewares/errorHandler');
-
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const app = express();
 const { PORT = 3000 } = process.env;
 
@@ -19,12 +19,15 @@ mongoose.connect('mongodb://localhost:27017/diplomadb', {
     useUnifiedTopology: true,
 });
 
+app.use(requestLogger);
+
 app.use('/', require('./routes/index'));
 
 app.use((req, res, next) => {
     next(new Error('Not found'));
 });
 
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
