@@ -18,12 +18,12 @@ module.exports.updateProfile = (req, res, next) => {
 };
 module.exports.createUser = (req, res, next) => {
   const {
-    name, email, password,
+      email, password,
   } = req.body;
 
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
-      name, email, password: hash,
+        email, password: hash,
     }))
     .then(() => res.send({ data: 'ok' }))
     .catch((err) => next(err));
