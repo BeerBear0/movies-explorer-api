@@ -6,6 +6,8 @@ const { errors } = require('celebrate');
 const { errorHandler } = require('./middlewares/errorHandler');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { allowAccess } = require('./middlewares/cors')
+
 const app = express();
 const { PORT = 3000 } = process.env;
 
@@ -21,6 +23,7 @@ mongoose.connect('mongodb://localhost:27017/diplomadb', {
 });
 
 app.use(requestLogger);
+app.use(allowAccess);
 
 app.use('/', require('./routes/index'));
 
