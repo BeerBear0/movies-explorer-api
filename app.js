@@ -16,10 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 mongoose.connect('mongodb://localhost:27017/diplomadb', {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
 });
 
 app.use(requestLogger);
@@ -33,7 +33,7 @@ app.use('/users', require('./routes/users'));
 app.use('/movies', require('./routes/movies'));
 
 app.use((req, res, next) => {
-    next(new Error('Not found'));
+  next(new Error('Not found'));
 });
 // app.use((req, res, next) => {
 //     next(new Error('Not found'));
@@ -44,5 +44,5 @@ app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-    console.log(`Сервер работает на ${PORT} порту`)
+  console.log(`Сервер работает на ${PORT} порту`);
 });

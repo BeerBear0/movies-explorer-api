@@ -5,13 +5,15 @@
   "main": "app.js",
   "scripts": {
     "lint": "npx eslint .",
+    "lintfix": "eslint --fix --ext .js, --ignore-path .gitignore .",
     "start": "node app.js",
     "dev": "nodemon"
   },
   "author": "BeerBear0",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.30.0",
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
     "nodemon": "^2.0.9"
