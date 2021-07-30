@@ -1,10 +1,9 @@
 const router = require('express').Router();
 const { Joi, celebrate  } = require('celebrate');
-// const { urlValidator } = require('../helper/validator');
 const { login, createUser, logout } = require('../controllers/users');
 const usersRouter = require('./users');
 const moviesRouter = require('./movies');
-const auth = require('../middlewares/auth');
+// const auth = require('../middlewares/auth');
 
 router.post('/signin', celebrate({
     body: Joi.object().keys({
@@ -19,14 +18,14 @@ router.post('/signup', celebrate({
     }),
 }), createUser);
 
-router.use(auth);
+// router.use(auth);
 
-router.use('/users', usersRouter);
-router.use('/movies', moviesRouter);
-router.use('/*', (req, res, next) => {
-    const err = new Error('Not Found');
-    next(err);
-});
-router.get('/signout', logout);
+// router.use('/users', usersRouter);
+// router.use('/movies', moviesRouter);
+// router.use('/*', (req, res, next) => {
+//     const err = new Error('Not Found');
+//     next(err);
+// });
+// router.get('/signout', logout);
 
 module.exports = router;
