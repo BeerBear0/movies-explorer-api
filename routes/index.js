@@ -7,25 +7,17 @@ const { login, createUser, logout } = require('../controllers/users');
 
 router.post('/signin', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required(),
+    email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
 router.post('/signup', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required(),
+    name: Joi.string().min(2).max(30),
+    email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), createUser);
-
-// router.use(auth);
-
-// router.use('/users', usersRouter);
-// router.use('/movies', moviesRouter);
-// router.use('/*', (req, res, next) => {
-//     const err = new Error('Not Found');
-//     next(err);
-// });
 router.get('/signout', logout);
 
 module.exports = router;

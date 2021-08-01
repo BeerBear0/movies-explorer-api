@@ -18,14 +18,20 @@ module.exports.updateProfile = (req, res, next) => {
 };
 module.exports.createUser = (req, res, next) => {
   const {
-      email, password,
+       email, password, name
   } = req.body;
-
+console.log(email);
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
-        email, password: hash,
+       email, password: hash, name
     }))
-    .then(() => res.send({ data: 'ok' }))
+    .then((user) => res.send(200).send({
+        user: {
+            email: user.email,
+            name: user.name,
+            _id: user._id,
+        }
+    }))
     .catch((err) => next(err));
 };
 module.exports.login = (req, res, next) => {

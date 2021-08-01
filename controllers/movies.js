@@ -33,7 +33,7 @@ module.exports.createMovie = (req, res, next) => {
     nameEN,
     thumbnail,
     movieId,
-    owner,
+     owner,
   })
     .then((movie) => res.send(movie))
     .catch((err) => next(err));
