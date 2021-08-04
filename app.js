@@ -16,7 +16,7 @@ const limiter = require('./middlewares/rate-limiter');
 const options = {
   origin: [
     'http://localhost:3001',
-    'https://movies-nesterova.students.nomoredomains.club'
+    'https://movies-nesterova.students.nomoredomains.club',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
@@ -41,7 +41,7 @@ mongoose.connect(NODE_ENV === 'production' ? DATA_BASE : 'mongodb://localhost:27
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
 app.use(requestLogger);

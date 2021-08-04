@@ -1,4 +1,3 @@
-
 const invalidDataErrorText = 'Введены невалидные данные';
 const forbiddenErrorText = 'Нет прав, нельзя удалять фильмы других пользователей';
 const invalidUserIdErrorText = 'Введен невалидный id пользователя';
@@ -9,12 +8,12 @@ const wrongCredentialsErrorText = 'Неправильные почта или п
 const unauthorizedErrorText = 'Необходима авторизация';
 
 module.exports = {
-    invalidDataErrorText,
-    forbiddenErrorText,
-    invalidUserIdErrorText,
-    userIdNotFoundText,
-    movieIdNotFoundErrorText,
-    duplicateEmailErrorText,
-    wrongCredentialsErrorText,
-    unauthorizedErrorText,
+  invalidDataErrorText,
+  forbiddenErrorText,
+  invalidUserIdErrorText,
+  userIdNotFoundText,
+  movieIdNotFoundErrorText,
+  duplicateEmailErrorText,
+  wrongCredentialsErrorText,
+  unauthorizedErrorText,
 };
