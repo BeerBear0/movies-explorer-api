@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const moviesSchema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
   country: {
     type: String,
     required: true,
@@ -26,7 +26,16 @@ const moviesSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(w{3}\.)?[a-z0-9-]{1,}\.\w{2,4}[a-z0-9\-._~:/?#[\]@!$&'()*+,;=]*/.test(v);
+        return /^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/gi.test(v);
+      },
+    },
+  },
+  trailer: {
+    type: String,
+    required: true,
+    validate: {
+      validator(v) {
+        return /^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/gi.test(v);
       },
     },
   },
@@ -35,18 +44,18 @@ const moviesSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/(w{3}\.)?[a-z0-9-]{1,}\.\w{2,4}[a-z0-9\-._~:/?#[\]@!$&'()*+,;=]*/.test(v);
+        return /^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/gi.test(v);
       },
     },
   },
   owner: {
-    type: mongoose.Types.ObjectId,
-    ref: 'User',
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
     required: true,
+    select: false,
   },
   movieId: {
-    type: mongoose.Types.ObjectId,
-    ref: 'movie',
+    type: Number,
     required: true,
   },
   nameRU: {
@@ -59,4 +68,4 @@ const moviesSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('movies', moviesSchema);
+module.exports = mongoose.model('movie', movieSchema);

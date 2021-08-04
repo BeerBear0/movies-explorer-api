@@ -1,48 +1,65 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const { errorHandler } = require('./middlewares/errorHandler');
+const cors = require('cors');
+const helmet = require('helmet');
+const usersRouter = require('./routes/users');
+const moviesRouter = require('./routes/movies');
+const errorRouter = require('./routes/error');
+const appRouter = require('./routes/index');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const { allowAccess } = require('./middlewares/cors')
+const errorHandler = require('./middlewares/errorHandler');
+const limiter = require('./middlewares/rate-limiter');
+
+const options = {
+  origin: [
+    'http://localhost:3001',
+    'https://movies-nesterova.students.nomoredomains.club'
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization', 'Accept'],
+  credentials: true,
+};
 
 const app = express();
+
+app.use(helmet());
+
+app.use('*', cors(options));
+
 const { PORT = 3000 } = process.env;
+const { DATA_BASE, NODE_ENV } = process.env;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 
-mongoose.connect('mongodb://localhost:27017/diplomadb', {
+mongoose.connect(NODE_ENV === 'production' ? DATA_BASE : 'mongodb://localhost:27017/bitfilmsdb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 });
 
 app.use(requestLogger);
-// app.use(allowAccess);
 
-app.use('/', require('./routes/index'));
+app.use(limiter);
+
+app.use('/', appRouter);
 
 app.use(auth);
 
-app.use('/users', require('./routes/users'));
-app.use('/movies', require('./routes/movies'));
-
-app.use((req, res, next) => {
-  next(new Error('Not found'));
-});
-// app.use((req, res, next) => {
-//     next(new Error('Not found'));
-// });
+app.use('/', usersRouter);
+app.use('/', moviesRouter);
+app.use('/', errorRouter);
 
 app.use(errorLogger);
+
 app.use(errors());
+
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Сервер работает на ${PORT} порту`);
-});
+app.listen(PORT, () => {});
