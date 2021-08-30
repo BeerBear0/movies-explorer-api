@@ -16,7 +16,7 @@ const limiter = require('./middlewares/rate-limiter');
 const options = {
   origin: [
     'http://localhost:3001',
-    'https://movies.nikko.nomoredomains.club',
+    'https://movies.nikko.nomoredomains.monster',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
@@ -62,4 +62,4 @@ app.use(errors());
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {console.log(PORT)});
+app.listen(PORT, () => {});
