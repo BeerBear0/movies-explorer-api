@@ -11,7 +11,7 @@ const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error-handler');
 const limiter = require('./middlewares/rate-limiter');
-const { allowAccess } = require('./middlewares/cors')
+const { allowAccess } = require('./middlewares/cors');
 
 const app = express();
 

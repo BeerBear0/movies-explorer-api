@@ -1,7 +1,7 @@
 const allowedCors = [
-  `http://localhost:3001`,
-  `https://movies.nikko.nomoredomains.monster`,
-  `http://movies.nikko.nomoredomains.monster`,
+  'http://localhost:3001',
+  'https://movies.nikko.nomoredomains.monster',
+  'http://movies.nikko.nomoredomains.monster',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
