@@ -1,6 +1,17 @@
-node_modules/
-build/
-.idea
-
+# Logs
+logs
 *.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+./frontend/node_modules
+./backend/node_modules
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.idea
+/backend/.env
+
 .env

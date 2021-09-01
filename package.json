@@ -2,7 +2,7 @@
   "name": "movies-exploer-api",
   "version": "1.0.0",
   "description": "`/routes` — папка с файлами роутера  \r `/controllers` — папка с файлами контроллеров пользователя и карточки   \r `/models` — папка с файлами описания схем пользователя и карточки",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "lint": "npx eslint .",
     "lintfix": "eslint --fix --ext .js, --ignore-path .gitignore .",

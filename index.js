@@ -7,16 +7,16 @@ const helmet = require('helmet');
 const usersRouter = require('./routes/users');
 const moviesRouter = require('./routes/movies');
 const errorRouter = require('./routes/error');
-const appRouter = require('./routes/index');
+const appRouter = require('./routes/app');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const errorHandler = require('./middlewares/errorHandler');
+const errorHandler = require('./middlewares/error-handler');
 const limiter = require('./middlewares/rate-limiter');
 
 const options = {
   origin: [
     'http://localhost:3001',
-    'https://movies.nikko.nomoredomains.monster',
+    // 'https://movies-nesterova.students.nomoredomains.club'
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
@@ -41,7 +41,6 @@ mongoose.connect(NODE_ENV === 'production' ? DATA_BASE : 'mongodb://localhost:27
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true,
 });
 
 app.use(requestLogger);
