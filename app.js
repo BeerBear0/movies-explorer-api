@@ -23,7 +23,7 @@ const options = {
   preflightContinue: false,
   optionsSuccessStatus: 204,
   allowedHeaders: ['Content-Type', 'origin', 'Authorization', 'Accept'],
-  // credentials: true,
+  credentials: true,
 };
 
 const app = express();
