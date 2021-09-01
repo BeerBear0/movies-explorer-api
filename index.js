@@ -12,13 +12,25 @@ const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error-handler');
 const limiter = require('./middlewares/rate-limiter');
-const { allowAccess } = require('./middlewares/cors');
+// const { allowAccess } = require('./middlewares/cors');
+
+const options = {
+  origin: [
+    'http://localhost:3001',
+    'https://movies.nikko.nomoredomains.club',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization', 'Accept'],
+  // credentials: true,
+};
 
 const app = express();
 
 app.use(helmet());
 
-app.use(cors(allowAccess));
+app.use('*', cors(options));
 
 const { PORT = 3000 } = process.env;
 const { DATA_BASE, NODE_ENV } = process.env;
